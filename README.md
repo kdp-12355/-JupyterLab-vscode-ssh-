@@ -39,3 +39,13 @@ MuJoCo / LeRobot 环境已可用
 无端口冲突 ✔
 token 唯一 ✔
 VNC 不受影响 ✔
+
+
+下一步你可以做什么
+
+现在可以直接进入实验：
+
+📓 打开 Notebook 跑 MuJoCo
+🤖 做 LeRobot 训练
+🖥 用 Terminal 跑脚本
+🎮 VNC 里看仿真窗口
