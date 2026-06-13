@@ -41,7 +41,172 @@ token 唯一 ✔
 VNC 不受影响 ✔
 
 
-下一步你可以做什么
+很好，现在已经进入“可复现实验成功状态”了，我帮你把**整套能跑起来的步骤做一个清晰总结**，以后你照这个流程就不会乱。
+
+---
+
+# 🚀 MuJoCo + LeRobot（VNC版）完整可运行流程总结
+
+---
+
+# 🧠 一、整体流程图（你现在已经跑通）
+
+```text
+1. SSH登录服务器
+        ↓
+2. 启动VNC桌面
+        ↓
+3. 进入conda环境 (lerobot)
+        ↓
+4. 启动Jupyter Lab
+        ↓
+5. 打开 1.collect_data.ipynb
+        ↓
+6. 启动MuJoCo环境
+        ↓
+7. VNC显示机械臂
+        ↓
+8. 键盘teleop控制
+        ↓
+9. 采集demo数据
+```
+
+---
+
+# 🧱 二、一步一步标准操作（可复用）
+
+---
+
+## 🟢 Step 1：进入服务器
+
+```bash
+ssh user@server_ip
+```
+
+---
+
+## 🟢 Step 2：进入环境
+
+```bash
+conda activate lerobot
+cd /workspace/lerobot-mujoco-tutorial-master
+```
+
+---
+
+## 🟢 Step 3：启动Jupyter（关键）
+
+```bash
+jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+```
+
+---
+
+## 🟢 Step 4：VNC打开浏览器
+
+输入：
+
+```text
+http://localhost:8888
+```
+
+---
+
+## 🟢 Step 5：打开 notebook
+
+打开：
+
+```text
+1.collect_data.ipynb
+```
+
+---
+
+## 🟢 Step 6：初始化MuJoCo环境
+
+notebook里运行：
+
+```python
+env = SimpleEnv(xml_path=...)
+```
+
+---
+
+## 🟢 Step 7：启动可视化
+
+```python
+env.init_viewer()
+```
+
+👉 VNC出现：
+
+* robot
+* mug
+* plate
+
+---
+
+## 🟢 Step 8：开始控制循环（核心）
+
+```python
+while True:
+    env.step_env()
+    env.render(teleop=True)
+```
+
+---
+
+## 🎮 Step 9：键盘控制（重点）
+
+| 功能    | 按键      |
+| ----- | ------- |
+| XY移动  | W A S D |
+| Z轴    | R F     |
+| 旋转    | Q E     |
+| 夹爪    | SPACE   |
+| reset | Z       |
+
+---
+
+## 🟢 Step 10：开始采集数据
+
+你做：
+
+> 🤖 抓 mug → 放 plate
+
+系统自动记录：
+
+```text
+demo_data/
+├── observation.image
+├── observation.state
+├── action
+```
+
+---
+
+# 📦 三、实验产物（非常重要）
+
+每一条 episode 会生成：
+
+```text
+data/
+ ├── chunk-000/
+ │    ├── episode_000001.parquet
+meta/
+ ├── episodes.jsonl
+ ├── stats.json
+```
+
+| 动作    | 按键      |
+| ----- | ------- |
+| 前后左右  | W A S D |
+| 上下    | R / F   |
+| 旋转    | Q / E   |
+| 夹爪    | SPACE   |
+| reset | Z       |
+
+
 
 现在可以直接进入实验：
 
