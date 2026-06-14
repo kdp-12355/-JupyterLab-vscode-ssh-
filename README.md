@@ -214,3 +214,32 @@ meta/
 🤖 做 LeRobot 训练
 🖥 用 Terminal 跑脚本
 🎮 VNC 里看仿真窗口
+
+
+如果第二次采集完成，而且没有覆盖原来的数据，那么你现在应该至少有：
+
+find demo_data -name "*.parquet"
+
+类似：
+
+demo_data/data/chunk-000/episode_000000.parquet
+demo_data/data/chunk-000/episode_000001.parquet
+
+建议马上确认一下：
+
+find demo_data -name "*.parquet" | wc -l
+
+如果输出：
+
+2
+
+说明两条 episode 都保存成功了。
+每隔几条检查一次
+
+查看数量：
+
+find demo_data -name "*.parquet" | wc -l
+
+查看具体文件：
+
+find demo_data -name "*.parquet" | sort
