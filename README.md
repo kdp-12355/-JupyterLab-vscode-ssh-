@@ -243,3 +243,148 @@ find demo_data -name "*.parquet" | wc -l
 查看具体文件：
 
 find demo_data -name "*.parquet" | sort
+
+
+可以，完全没问题，而且你现在这个状态**是可以安全停的**。
+
+---
+
+# 🔋 你现在可以放心做的事
+
+## ✔ 直接关机 / 断电 / 关闭 terminal 都可以
+
+因为你已经确认：
+
+```text id="p1k2m7"
+episode_000000.parquet
+episode_000001.parquet
+```
+
+👉 数据已经落盘保存了（不是临时内存）
+
+---
+
+# 🧠 明天回来怎么继续（重点）
+
+你只需要按这个流程：
+
+---
+
+## 🚀 Step 1：重新进入环境
+
+```bash id="a8m2p1"
+conda activate lerobot
+cd /workspace/lerobot-mujoco-tutorial-master
+```
+
+---
+
+## 🚀 Step 2：检查数据还在不在
+
+```bash id="q7m1k8"
+find demo_data -name "*.parquet"
+```
+
+如果看到：
+
+```text id="c2n9k1"
+episode_000000.parquet
+episode_000001.parquet
+```
+
+说明数据完整保留。
+
+---
+
+## 🚀 Step 3：打开 Jupyter
+
+```bash id="v1m8k3"
+jupyter lab
+```
+
+进入：
+
+```text id="n8k2p7"
+1.collect_data.ipynb
+```
+
+---
+
+## ⚠️ 明天最重要的一点（防止你又踩坑）
+
+如果再次看到：
+
+```text id="m3k8p1"
+Do you want to delete it? (y/n)
+```
+
+👉 一定选：
+
+```text id="k2m7q9"
+n
+```
+
+---
+
+## 🚀 Step 4：继续采集
+
+你现在已经有：
+
+```text id="p9m2k1"
+episode_000000
+episode_000001
+```
+
+明天会自动接着变成：
+
+```text id="b7m1k8"
+episode_000002
+episode_000003
+...
+```
+
+---
+
+# 🧠 关键提醒（非常重要）
+
+你现在这个系统已经“进入正轨”，所以：
+
+### ❌ 不要再 rm -rf demo_data
+
+### ❌ 不要重新初始化整个 dataset
+
+### ❌ 不要 Run All notebook
+
+---
+
+# 💡 最佳实践（给你之后用）
+
+以后每天采集就是：
+
+```text id="z1m8k3"
+1. 打开 jupyter
+2. 运行 init cell
+3. 运行 collect cell
+4. 采 5~10 条
+5. 关掉
+```
+
+---
+
+# 🔋 总结一句话
+
+你现在状态是：
+
+> ✅ 数据已经安全保存
+> ✅ 可以随时中断
+> ✅ 明天可以无缝继续采集
+
+---
+
+如果你明天回来想升级一步（比如“一键采集 + 自动记录 + 不用管 notebook”），我可以帮你把它改成一个：
+
+```bash id="x8m2k9"
+python collect.py --episodes 10
+```
+
+那种完全不会乱的版本。
