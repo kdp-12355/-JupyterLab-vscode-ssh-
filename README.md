@@ -1,5 +1,9 @@
 # -JupyterLab-vscode-ssh-
 
+
+
+source ~/lerobot312_env/bin/activate？什么意思
+
 启动（关键）
 
 只开一个：
